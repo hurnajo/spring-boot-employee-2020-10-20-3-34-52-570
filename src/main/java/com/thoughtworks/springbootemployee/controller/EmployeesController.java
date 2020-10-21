@@ -1,6 +1,8 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Employee;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/employees")
 public class EmployeesController {
     private final List<Employee> employees = new ArrayList<>();
+    private EmployeeService employeeService =
+            new EmployeeService(new EmployeeRepository());
+
 
     @GetMapping
     public List<Employee> getAll() {
@@ -59,9 +64,6 @@ public class EmployeesController {
 
     @GetMapping(params = {"page", "pageSize"})
     public List<Employee> getByPage(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
-        return employees.stream()
-                .skip((page - 1) * pageSize)
-                .limit(pageSize)
-                .collect(Collectors.toList());
+        return employeeService.getByPage(page,pageSize);
     }
 }
