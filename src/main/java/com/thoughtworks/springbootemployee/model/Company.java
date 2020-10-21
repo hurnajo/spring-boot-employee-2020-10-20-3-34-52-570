@@ -1,18 +1,13 @@
 package com.thoughtworks.springbootemployee.model;
 
-import java.util.List;
-
 public class Company {
-    Integer id;
-    String companyName;
-    Integer employeesNumber;
-    List<Employee> employees;
+    private Integer companyId;
+    private String companyName;
 
-    public Company(Integer id, String companyName, Integer employeesNumber, List<Employee> employees) {
+
+    public Company(Integer companyId, String companyName) {
+        this.companyId = companyId;
         this.companyName = companyName;
-        this.employeesNumber = employeesNumber;
-        this.employees = employees;
-        this.id = id;
     }
 
     public Company() {
@@ -22,15 +17,7 @@ public class Company {
         return companyName;
     }
 
-    public Integer getEmployeesNumber() {
-        return employeesNumber;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public Integer getId() {
-        return id;
+    public Integer getCompanyId() {
+        return companyId;
     }
 }
