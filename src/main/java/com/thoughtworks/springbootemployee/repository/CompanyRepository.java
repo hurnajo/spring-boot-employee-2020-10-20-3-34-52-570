@@ -44,4 +44,11 @@ public class CompanyRepository {
                 .filter(employee -> employee.getId() == companyId)
                 .collect(Collectors.toList());
     }
+
+    public List<Company> getByPage(Integer page, Integer pageSize) {
+        return companies.stream()
+                .skip((pageSize -1 ) * page)
+                .limit(pageSize)
+                .collect(Collectors.toList());
+    }
 }
