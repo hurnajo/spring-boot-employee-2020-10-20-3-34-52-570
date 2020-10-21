@@ -22,18 +22,19 @@ public class CompanyService {
     }
 
     public Company findById(Integer id) {
-        return companyRepository.findById(id);
+        return companyRepository.findCompanyById(id);
     }
 
     public Company updateById(Integer id, Company company) {
-        return companyRepository.updateById(id,company);
+        return companyRepository.updateCompanyById(id,company);
     }
 
     public void deleteById(Integer id) {
         companyRepository.deleteById(id);
     }
 
-    public List<Employee> getEmployeeByCompanyId(Integer companyId) {
-        return null;
+    public List<Employee> getEmployeesByCompanyId(int companyId) {
+        return companyRepository.getEmployeesByCompanyId(companyId);
     }
+
 }
