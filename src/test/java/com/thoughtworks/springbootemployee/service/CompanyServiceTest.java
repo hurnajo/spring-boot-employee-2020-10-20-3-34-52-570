@@ -11,6 +11,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 public class CompanyServiceTest {
@@ -56,5 +57,21 @@ public class CompanyServiceTest {
         Company actual = service.findById(company.getId());
         //then
         assertEquals(company.getId(),actual.getId());
+    }
+
+    @Test
+    void should_update_company_when_update_by_company_id_given_company_id() {
+        //given
+        List<Employee> employees = asList(new Employee(1, "Leo", 18, "male", 1000),
+                new Employee(2, "Leo", 18, "male", 1000));
+        Company company = new Company(1,"OOCL", 2, employees);
+
+        Company updateCompany = new Company(1,"COSCO",2, employees);
+        when(repository.updateById(company.getId(),updateCompany)).thenReturn(updateCompany);
+        CompanyService service = new CompanyService(repository);
+        //when
+        Company actual = service.updateById(company.getId(),updateCompany);
+        //then
+        assertEquals("COSCO",actual.getCompanyName());
     }
 }
