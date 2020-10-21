@@ -13,6 +13,6 @@ public class CompanyService {
     }
 
     public List<Company> getAll() {
-        return null;
+        return companyRepository.findAll();
     }
 }
