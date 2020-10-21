@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -94,4 +95,23 @@ class CompanyServiceTest {
         //then
         verify(repository, times(1)).deleteById(company.getCompanyId());
     }
+
+    @Test
+    void should_return_2_company_when_getByPage_given_company_request() {
+        //given
+        List<Company> companies =
+                asList(new Company(1, "OOCL"),
+                        new Company(2, "COSCO"),
+                        new Company(3, "COSCON"),
+                        new Company(4, "PANASIA"),
+                        new Company(5, "OOL"));
+        EmployeeRepository employeeRepository = Mockito.mock(EmployeeRepository.class);
+        when(repository.getByPage(1, 5)).thenReturn(companies);
+        CompanyService companyService = new CompanyService(repository);
+        //WHEN
+        List<Company> companyActual = companyService.getByPage(1, 5);
+        //THEN
+        assertEquals(5, companyActual.size());
+    }
+
 }

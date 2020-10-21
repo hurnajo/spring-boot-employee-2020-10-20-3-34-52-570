@@ -8,7 +8,8 @@ import org.mockito.Mockito;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
 public class EmployeeServiceTest {
@@ -50,7 +51,7 @@ public class EmployeeServiceTest {
         //when
         Employee actual = service.findById(employee.getId());
         //then
-        assertEquals(employee.getId(),actual.getId());
+        assertEquals(employee.getId(), actual.getId());
     }
 
     @Test
@@ -59,25 +60,25 @@ public class EmployeeServiceTest {
         String gender = "Male";
         Employee firstemployee = new Employee(1, "Leo", 18, "male", 1000);
         Employee secondemployee = new Employee(1, "Leo", 18, "male", 1000);
-        when(repository.findByGender(gender)).thenReturn(asList(firstemployee,secondemployee));
+        when(repository.findByGender(gender)).thenReturn(asList(firstemployee, secondemployee));
         EmployeeService service = new EmployeeService(repository);
         //when
         List<Employee> actual = service.findByGender(gender);
         //then
-        assertEquals(asList(firstemployee,secondemployee),actual);
+        assertEquals(asList(firstemployee, secondemployee), actual);
     }
 
     @Test
     void should_update_employee_when_update_by_employee_id_given_employee_id() {
         //given
         Employee employee = new Employee(1, "Leo", 18, "male", 1000);
-        Employee updateEmployee = new Employee(1,"Leo",18,"male",2000);
-        when(repository.updateById(employee.getId(),employee)).thenReturn(updateEmployee);
+        Employee updateEmployee = new Employee(1, "Leo", 18, "male", 2000);
+        when(repository.updateById(employee.getId(), employee)).thenReturn(updateEmployee);
         EmployeeService service = new EmployeeService(repository);
         //when
-        Employee actual = service.updateById(employee.getId(),employee);
+        Employee actual = service.updateById(employee.getId(), employee);
         //then
-        assertNotEquals(employee.getSalary(),actual.getSalary());
+        assertNotEquals(employee.getSalary(), actual.getSalary());
     }
 
     @Test
@@ -88,6 +89,19 @@ public class EmployeeServiceTest {
         //when
         service.deleteById(employee.getId());
         //then
-        verify(repository,times(1)).deleteById(employee.getId());
+        verify(repository, times(1)).deleteById(employee.getId());
+    }
+
+    @Test
+    void should_return_2_company_when_getByPage_given_employee_request() {
+        //given
+        List<Employee> employeeList = asList(new Employee(),
+                new Employee(), new Employee(), new Employee(), new Employee());
+        when(repository.getByPage(1, 5)).thenReturn(employeeList);
+        EmployeeService employeeService = new EmployeeService(repository);
+        //when
+        List<Employee> employeeActual = employeeService.getByPage(1, 5);
+        //then
+        assertEquals(5, employeeActual.size());
     }
 }
