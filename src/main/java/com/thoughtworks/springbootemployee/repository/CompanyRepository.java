@@ -10,11 +10,6 @@ import java.util.stream.Collectors;
 public class CompanyRepository {
     private List<Company> companies = new ArrayList<>();
 
-    public CompanyRepository() {
-        companies.add(new Company(1, "Toyota"));
-        companies.add(new Company(2, "Mitsubishi"));
-    }
-
     public List<Company> findAll() {
         return companies;
     }
