@@ -35,6 +35,6 @@ public class EmployeeService {
     }
 
     public List<Employee> findByGender(String gender) {
-        return null;
+        return employeeRepository.findByGender(gender);
     }
 }
