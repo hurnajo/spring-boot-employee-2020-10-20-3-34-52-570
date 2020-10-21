@@ -33,8 +33,9 @@ public class EmployeeServiceTest {
         //given
         Employee employee = new Employee(1,"Leo",18,"male",1000);
         EmployeeService service = new EmployeeService(repository);
+        when(repository.save(employee)).thenReturn(employee);
         //when
-        Employee actual = service.create();
+        Employee actual = service.create(employee);
         //then
         assertEquals(1,actual.getId());
     }
