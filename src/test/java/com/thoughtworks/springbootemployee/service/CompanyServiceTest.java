@@ -14,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class CompanyServiceTest {
+    CompanyRepository repository = Mockito.mock(CompanyRepository.class);
 
     @Test
     void should_get_all_when_get_company() {
         //given
         List<Company> expectedCompany = asList(new Company(), new Company());
-        CompanyRepository repository = Mockito.mock(CompanyRepository.class);
         when(repository.findAll()).thenReturn(expectedCompany);
         CompanyService service = new CompanyService(repository);
 
@@ -28,5 +28,19 @@ public class CompanyServiceTest {
 
         //given
         assertEquals(2, actual.size());
+    }
+
+    @Test
+    void should_create_company_when_create_given_company() {
+        //given
+        List<Employee> employees = asList(new Employee(1, "Leo", 18, "male", 1000),
+            new Employee(2, "Leo", 18, "male", 1000));
+        Company company = new Company("OOCL", 2, employees);
+        CompanyService service = new CompanyService(repository);
+        when(repository.save(company)).thenReturn(company);
+        //when
+        Company actual = service.create(company);
+        //then
+        assertEquals("OOCL", actual.getCompanyName());
     }
 }
