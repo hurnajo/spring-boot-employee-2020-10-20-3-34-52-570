@@ -33,4 +33,8 @@ public class CompanyRepository {
         });
         return updatedCompany;
     }
+
+    public void deleteById(Integer id) {
+        companies.stream().filter(company -> company.getId() == (id)).findFirst().ifPresent(companies::remove);
+    }
 }
