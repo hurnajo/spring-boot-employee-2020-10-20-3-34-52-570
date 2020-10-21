@@ -9,12 +9,14 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 public class EmployeeServiceTest {
     EmployeeRepository repository = Mockito.mock(EmployeeRepository.class);
+
     @Test
-    void should_get_all_when_get_employees(){
+    void should_get_all_when_get_employees() {
         //given
 
         List<Employee> expectedEmployees = asList(new Employee(), new Employee());
@@ -31,27 +33,24 @@ public class EmployeeServiceTest {
     @Test
     void should_create_employee_when_create_given_employee() {
         //given
-        Employee employee = new Employee(1,"Leo",18,"male",1000);
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
         EmployeeService service = new EmployeeService(repository);
         when(repository.save(employee)).thenReturn(employee);
         //when
         Employee actual = service.create(employee);
         //then
-        assertEquals(1,actual.getId());
+        assertEquals(1, actual.getId());
     }
 
-//    @Test
-//    void should_update_employee_when_update_given_employee() {
-//        //given
-//        Employee employeeOld = new Employee(1,"Leo",18,"male",1000);
-//        Employee employeeNew = new Employee(1,"Leo",20,"male",1000);
-//        EmployeeService service = new EmployeeService(repository);
-//        when(repository.update(employeeNew)).thenReturn(employeeNew);
-//        //when
-//        Employee actual = service.update(employeeOld, employeeNew);
-//        //then
-//        assertEquals(20,actual.getAge());
-//    }
-
-
+    @Test
+    void should_get_employee_when_get_by_id_given_employee_id() {
+        //given
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
+        when(repository.findById(employee.getId())).thenReturn(employee);
+        EmployeeService service = new EmployeeService(repository);
+        //when
+        Employee actual = service.findById(employee.getId());
+        //then
+        assertEquals(employee.getId(),actual.getId());
+    }
 }
