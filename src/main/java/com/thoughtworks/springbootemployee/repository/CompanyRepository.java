@@ -18,6 +18,7 @@ public class CompanyRepository {
     }
 
     public Company save(Company company) {
-        return null;
+        companies.add(company);
+        return company;
     }
 }
