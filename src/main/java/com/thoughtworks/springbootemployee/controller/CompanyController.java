@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Company;
+import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.service.CompanyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,15 @@ public class CompanyController {
     @ResponseStatus(HttpStatus.CREATED)
     public Company createNewCompany(@RequestBody Company company) {
         return companyService.create(company);
+    }
+
+    @GetMapping("/{companyId}")
+    public Company getCompanyById(@PathVariable int companyId) {
+        return companyService.findById(companyId);
+    }
+
+    @GetMapping("/{companyId}/employees")
+    public List<Employee> getEmployeesByCompanyId(@PathVariable int companyId) {
+        return companyService.getEmployeesByCompanyId(companyId);
     }
 }
