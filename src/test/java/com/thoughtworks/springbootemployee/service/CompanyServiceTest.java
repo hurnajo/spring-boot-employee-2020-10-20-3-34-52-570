@@ -12,7 +12,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CompanyServiceTest {
     CompanyRepository repository = Mockito.mock(CompanyRepository.class);
@@ -73,5 +73,18 @@ public class CompanyServiceTest {
         Company actual = service.updateById(company.getId(),updateCompany);
         //then
         assertEquals("COSCO",actual.getCompanyName());
+    }
+
+    @Test
+    void should_delete_company_when_delete_by_company_id_given_company() {
+        //given
+        List<Employee> employees = asList(new Employee(1, "Leo", 18, "male", 1000),
+                new Employee(2, "Leo", 18, "male", 1000));
+        Company company = new Company(1,"OOCL", 2, employees);
+        CompanyService service = new CompanyService(repository);
+        //when
+        service.deleteById(company.getId());
+        //then
+        verify(repository,times(1)).deleteById(company.getId());
     }
 }
