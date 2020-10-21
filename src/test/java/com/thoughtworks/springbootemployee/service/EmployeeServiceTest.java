@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class EmployeeServiceTest {
-
+    EmployeeRepository repository = Mockito.mock(EmployeeRepository.class);
     @Test
     void should_get_all_when_get_employees(){
         //given
-        EmployeeRepository repository = Mockito.mock(EmployeeRepository.class);
+
         List<Employee> expectedEmployees = asList(new Employee(), new Employee());
         when(repository.findAll()).thenReturn(expectedEmployees);
         EmployeeService service = new EmployeeService(repository);
@@ -28,4 +28,14 @@ public class EmployeeServiceTest {
         assertEquals(2, actual.size());
     }
 
+    @Test
+    void should_create_employee_when_create_given_employee() {
+        //given
+        Employee employee = new Employee(1,"Leo",18,"male",1000);
+        EmployeeService service = new EmployeeService(repository);
+        //when
+        Employee actual = service.create();
+        //then
+        assertEquals(1,actual.getId());
+    }
 }
