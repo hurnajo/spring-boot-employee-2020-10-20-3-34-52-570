@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class EmployeeServiceTest {
     EmployeeRepository repository = Mockito.mock(EmployeeRepository.class);
@@ -64,5 +64,23 @@ public class EmployeeServiceTest {
         Employee actual = service.updateById(employee.getId(),employee);
         //then
         assertNotEquals(employee.getSalary(),actual.getSalary());
+    }
+
+    @Test
+    void should_delete_employee_when_delete_by_employee_id_given_employee() {
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
+//        List<Employee> expectedEmployees = asList(new Employee(1, "Leo", 18, "male", 1000),
+//                new Employee(2, "Leo", 18, "male", 1000));
+//        when(repository.findAll()).thenReturn(expectedEmployees);
+//        expectedEmployees = repository.findAll();
+//        repository.deleteById(1);
+
+        EmployeeService service = new EmployeeService(repository);
+        //when
+//        service.deleteById(2);
+        service.deleteById(employee.getId());
+//        List<Employee> actual = service.getAll();
+        //given
+        verify(repository,times(1)).deleteById(employee.getId());
     }
 }
