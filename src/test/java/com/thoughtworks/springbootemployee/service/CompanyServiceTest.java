@@ -44,15 +44,17 @@ public class CompanyServiceTest {
         assertEquals("OOCL", actual.getCompanyName());
     }
 
-//    @Test
-//    void should_get_company_when_get_by_name_given_company_name() {
-//        //given
-//        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
-//        when(repository.findById(employee.getId())).thenReturn(employee);
-//        EmployeeService service = new EmployeeService(repository);
-//        //when
-//        Employee actual = service.findById(employee.getId());
-//        //then
-//        assertEquals(employee.getId(),actual.getId());
-//    }
+    @Test
+    void should_get_company_when_get_by_name_given_company_id() {
+        //given
+        List<Employee> employees = asList(new Employee(1, "Leo", 18, "male", 1000),
+                new Employee(2, "Leo", 18, "male", 1000));
+        Company company = new Company(1,"OOCL", 2, employees);
+        when(repository.findById(company.getId())).thenReturn(company);
+        CompanyService service = new CompanyService(repository);
+        //when
+        Company actual = service.findById(company.getId());
+        //then
+        assertEquals(company.getId(),actual.getId());
+    }
 }
