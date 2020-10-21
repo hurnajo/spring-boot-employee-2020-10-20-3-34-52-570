@@ -68,19 +68,12 @@ public class EmployeeServiceTest {
 
     @Test
     void should_delete_employee_when_delete_by_employee_id_given_employee() {
+        //given
         Employee employee = new Employee(1, "Leo", 18, "male", 1000);
-//        List<Employee> expectedEmployees = asList(new Employee(1, "Leo", 18, "male", 1000),
-//                new Employee(2, "Leo", 18, "male", 1000));
-//        when(repository.findAll()).thenReturn(expectedEmployees);
-//        expectedEmployees = repository.findAll();
-//        repository.deleteById(1);
-
         EmployeeService service = new EmployeeService(repository);
         //when
-//        service.deleteById(2);
         service.deleteById(employee.getId());
-//        List<Employee> actual = service.getAll();
-        //given
+        //then
         verify(repository,times(1)).deleteById(employee.getId());
     }
 }
