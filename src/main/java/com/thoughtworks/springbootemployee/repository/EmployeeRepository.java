@@ -32,4 +32,8 @@ public class EmployeeRepository {
     public void deleteById(Integer employeeId) {
         employees.stream().filter(employee -> employee.getId() == (employeeId)).findFirst().ifPresent(employees::remove);
     }
+
+    public List<Employee> findByGender(String gender) {
+        return null;
+    }
 }

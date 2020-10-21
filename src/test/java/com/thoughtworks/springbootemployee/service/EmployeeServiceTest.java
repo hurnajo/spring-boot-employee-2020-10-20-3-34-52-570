@@ -54,6 +54,20 @@ public class EmployeeServiceTest {
     }
 
     @Test
+    void shoud_return_all_male_gender_when_filter_given_male_gender() {
+        //given
+        String gender = "Male";
+        Employee firstemployee = new Employee(1, "Leo", 18, "male", 1000);
+        Employee secondemployee = new Employee(1, "Leo", 18, "male", 1000);
+        when(repository.findByGender(gender)).thenReturn(asList(firstemployee,secondemployee));
+        EmployeeService service = new EmployeeService(repository);
+        //when
+        List<Employee> actual = service.findByGender(gender);
+        //then
+        assertEquals(asList(firstemployee,secondemployee),actual);
+    }
+
+    @Test
     void should_update_employee_when_update_by_employee_id_given_employee_id() {
         //given
         Employee employee = new Employee(1, "Leo", 18, "male", 1000);
