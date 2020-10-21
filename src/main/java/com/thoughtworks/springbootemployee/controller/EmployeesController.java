@@ -13,7 +13,7 @@ public class EmployeesController {
     private final List<Employee> employees = new ArrayList<>();
 
     @GetMapping
-    public List<Employee> getAll(){
+    public List<Employee> getAll() {
         return employees;
     }
 
@@ -23,4 +23,10 @@ public class EmployeesController {
         employees.add(employee);
         return employee;
     }
+
+    @GetMapping("/{employeeId}")
+    public Employee get(@PathVariable Integer employeeId) {
+        return employees.stream().filter(employee -> employee.getId().equals(employeeId)).findFirst().orElse(null);
+    }
+
 }
