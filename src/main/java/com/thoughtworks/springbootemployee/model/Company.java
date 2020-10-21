@@ -3,16 +3,16 @@ package com.thoughtworks.springbootemployee.model;
 import java.util.List;
 
 public class Company {
-    Integer companyId;
+    Integer id;
     String companyName;
     Integer employeesNumber;
     List<Employee> employees;
 
-    public Company(Integer companyId, String companyName, Integer employeesNumber, List<Employee> employees) {
+    public Company(Integer id, String companyName, Integer employeesNumber, List<Employee> employees) {
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
         this.employees = employees;
-        this.companyId = companyId;
+        this.id = id;
     }
 
     public Company() {
@@ -30,7 +30,7 @@ public class Company {
         return employees;
     }
 
-    public Integer getCompanyId() {
-        return companyId;
+    public Integer getId() {
+        return id;
     }
 }
