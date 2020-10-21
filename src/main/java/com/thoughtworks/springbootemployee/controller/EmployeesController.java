@@ -32,11 +32,20 @@ public class EmployeesController {
     @PutMapping("/{employeeId}")
     public Employee update(@PathVariable Integer employeeId, @RequestBody Employee employeeUpdate) {
         employees.stream()
-                .filter(employee -> employee.getId().equals(employeeId)).findFirst()
+                .filter(employee -> employee.getId().equals(employeeId))
+                .findFirst()
                 .ifPresent(employee -> {
                     employees.remove(employee);
                     employees.add(employeeUpdate);
                 });
         return employeeUpdate;
+    }
+
+    @DeleteMapping("/{employeeId}")
+    public void delete(@PathVariable Integer employeeId){
+        employees.stream()
+                .filter(employee -> employee.getId().equals(employeeId))
+                .findFirst()
+                .ifPresent(employees::remove);
     }
 }
