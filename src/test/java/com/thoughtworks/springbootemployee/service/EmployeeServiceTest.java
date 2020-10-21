@@ -32,7 +32,7 @@ public class EmployeeServiceTest {
     @Test
     void should_create_employee_when_create_given_employee() {
         //given
-        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000,1);
         EmployeeService service = new EmployeeService(repository);
         when(repository.save(employee)).thenReturn(employee);
         //when
@@ -44,7 +44,7 @@ public class EmployeeServiceTest {
     @Test
     void should_get_employee_when_get_by_id_given_employee_id() {
         //given
-        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000,1);
         when(repository.findById(employee.getId())).thenReturn(employee);
         EmployeeService service = new EmployeeService(repository);
         //when
@@ -57,8 +57,8 @@ public class EmployeeServiceTest {
     void shoud_return_all_male_gender_when_filter_given_male_gender() {
         //given
         String gender = "Male";
-        Employee firstemployee = new Employee(1, "Leo", 18, "male", 1000);
-        Employee secondemployee = new Employee(1, "Leo", 18, "male", 1000);
+        Employee firstemployee = new Employee(1, "Leo", 18, "male", 1000,1);
+        Employee secondemployee = new Employee(1, "Leo", 18, "male", 1000,1);
         when(repository.findByGender(gender)).thenReturn(asList(firstemployee,secondemployee));
         EmployeeService service = new EmployeeService(repository);
         //when
@@ -70,8 +70,8 @@ public class EmployeeServiceTest {
     @Test
     void should_update_employee_when_update_by_employee_id_given_employee_id() {
         //given
-        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
-        Employee updateEmployee = new Employee(1,"Leo",18,"male",2000);
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000,1);
+        Employee updateEmployee = new Employee(1,"Leo",18,"male",2000,1);
         when(repository.updateById(employee.getId(),employee)).thenReturn(updateEmployee);
         EmployeeService service = new EmployeeService(repository);
         //when
@@ -83,7 +83,7 @@ public class EmployeeServiceTest {
     @Test
     void should_delete_employee_when_delete_by_employee_id_given_employee() {
         //given
-        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000,1);
         EmployeeService service = new EmployeeService(repository);
         //when
         service.deleteById(employee.getId());
