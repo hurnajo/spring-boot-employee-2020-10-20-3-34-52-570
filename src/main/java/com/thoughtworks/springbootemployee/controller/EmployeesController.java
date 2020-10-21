@@ -43,7 +43,7 @@ public class EmployeesController {
     }
 
     @DeleteMapping("/{employeeId}")
-    public void delete(@PathVariable Integer employeeId){
+    public void delete(@PathVariable Integer employeeId) {
         employees.stream()
                 .filter(employee -> employee.getId().equals(employeeId))
                 .findFirst()
@@ -57,10 +57,10 @@ public class EmployeesController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping(params = {"page","pageSize"})
-    public List<Employee> getByPage(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize){
+    @GetMapping(params = {"page", "pageSize"})
+    public List<Employee> getByPage(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize) {
         return employees.stream()
-                .skip((page-1)*pageSize)
+                .skip((page - 1) * pageSize)
                 .limit(pageSize)
                 .collect(Collectors.toList());
     }
