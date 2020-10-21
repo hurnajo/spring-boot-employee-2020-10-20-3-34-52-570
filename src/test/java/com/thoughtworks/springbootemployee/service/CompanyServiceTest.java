@@ -59,8 +59,8 @@ class CompanyServiceTest {
     @Test
     void should_get_list_of_employee_when_search_given_certain_company() {
         //given
-        Company company = new Company(1, "Telus");
-        Employee employee = new Employee(1, "Tom", 18, "Male", 1000, 1);
+        Company company = new Company(1, "OOCL");
+        Employee employee = new Employee(1, "Tom", 18, "Male", 1000);
 
         when(repository.getEmployeesByCompanyId(company.getCompanyId())).thenReturn(Collections.singletonList(employee));
         CompanyService companyService = new CompanyService(repository);
