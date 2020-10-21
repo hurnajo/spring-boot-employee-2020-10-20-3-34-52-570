@@ -3,9 +3,11 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CompanyService {
     private CompanyRepository companyRepository;
 
@@ -26,7 +28,7 @@ public class CompanyService {
     }
 
     public Company updateById(Integer id, Company company) {
-        return companyRepository.updateCompanyById(id,company);
+        return companyRepository.updateCompanyById(id, company);
     }
 
     public void deleteById(Integer id) {

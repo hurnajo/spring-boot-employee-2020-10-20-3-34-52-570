@@ -1,12 +1,12 @@
 package com.thoughtworks.springbootemployee.service;
 
-import com.thoughtworks.springbootemployee.exceptions.EmployeeNotFoundException;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
@@ -22,12 +22,12 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee findById(Integer employeeId){
+    public Employee findById(Integer employeeId) {
         return employeeRepository.findById(employeeId);
     }
 
     public Employee updateById(Integer employeeId, Employee employee) {
-        return employeeRepository.updateById(employeeId,employee);
+        return employeeRepository.updateById(employeeId, employee);
     }
 
     public void deleteById(Integer employeeId) {
