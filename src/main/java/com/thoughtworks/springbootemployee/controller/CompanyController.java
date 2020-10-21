@@ -2,9 +2,8 @@ package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.service.CompanyService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ import java.util.List;
 @RequestMapping("/companies")
 public class CompanyController {
     private final CompanyService companyService;
+
 
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
@@ -21,5 +21,10 @@ public class CompanyController {
     public List<Company> getAll() {
         return companyService.getAll();
     }
-    
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Company createNewCompany(@RequestBody Company company) {
+        return companyService.create(company);
+    }
 }
