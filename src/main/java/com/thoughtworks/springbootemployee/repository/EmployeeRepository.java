@@ -20,4 +20,12 @@ public class EmployeeRepository {
     public Employee findById(Integer employeeId) {
         return employees.stream().filter(employee -> employee.getId() == employeeId).findFirst().orElse(null);
     }
+
+    public Employee updateById(Integer employeeId, Employee updatedEmployee) {
+        employees.stream().filter(employee -> employee.getId() == employeeId).findFirst().ifPresent(employee -> {
+            employees.remove(employee);
+            employees.add(updatedEmployee);
+        });
+        return updatedEmployee;
+    }
 }

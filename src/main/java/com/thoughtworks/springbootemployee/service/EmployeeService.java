@@ -26,4 +26,7 @@ public class EmployeeService {
         return employeeRepository.findById(employeeId);
     }
 
+    public Employee updateById(Integer employeeId, Employee employee) {
+        return null;
+    }
 }

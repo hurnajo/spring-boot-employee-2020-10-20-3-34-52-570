@@ -8,8 +8,7 @@ import org.mockito.Mockito;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class EmployeeServiceTest {
@@ -52,5 +51,18 @@ public class EmployeeServiceTest {
         Employee actual = service.findById(employee.getId());
         //then
         assertEquals(employee.getId(),actual.getId());
+    }
+
+    @Test
+    void should_update_employee_when_update_by_employee_id_given_employee_id() {
+        //given
+        Employee employee = new Employee(1, "Leo", 18, "male", 1000);
+        Employee updateEmployee = new Employee(1,"Leo",18,"male",2000);
+        when(repository.updateById(employee.getId(),employee)).thenReturn(updateEmployee);
+        EmployeeService service = new EmployeeService(repository);
+        //when
+        Employee actual = service.updateById(employee.getId(),employee);
+        //then
+        assertNotEquals(employee.getSalary(),actual.getSalary());
     }
 }
