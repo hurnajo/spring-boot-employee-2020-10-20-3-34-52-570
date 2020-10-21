@@ -27,6 +27,6 @@ public class EmployeeService {
     }
 
     public Employee updateById(Integer employeeId, Employee employee) {
-        return null;
+        return employeeRepository.updateById(employeeId,employee);
     }
 }
