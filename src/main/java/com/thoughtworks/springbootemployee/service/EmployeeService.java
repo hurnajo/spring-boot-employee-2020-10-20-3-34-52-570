@@ -19,4 +19,12 @@ public class EmployeeService {
     public Employee create(Employee employee) {
         return employeeRepository.save(employee);
     }
+
+    public Employee update(Employee oldEmployee, Employee newEmployee) {
+        if(oldEmployee.getId().equals(newEmployee.getId())){
+            employeeRepository.delete(oldEmployee);
+            employeeRepository.save(newEmployee);
+        }
+        return newEmployee;
+    }
 }

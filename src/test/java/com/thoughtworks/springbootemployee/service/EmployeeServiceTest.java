@@ -39,4 +39,19 @@ public class EmployeeServiceTest {
         //then
         assertEquals(1,actual.getId());
     }
+
+//    @Test
+//    void should_update_employee_when_update_given_employee() {
+//        //given
+//        Employee employeeOld = new Employee(1,"Leo",18,"male",1000);
+//        Employee employeeNew = new Employee(1,"Leo",20,"male",1000);
+//        EmployeeService service = new EmployeeService(repository);
+//        when(repository.update(employeeNew)).thenReturn(employeeNew);
+//        //when
+//        Employee actual = service.update(employeeOld, employeeNew);
+//        //then
+//        assertEquals(20,actual.getAge());
+//    }
+
+
 }
