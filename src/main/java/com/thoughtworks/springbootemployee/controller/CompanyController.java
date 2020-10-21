@@ -38,4 +38,14 @@ public class CompanyController {
     public List<Employee> getEmployeesByCompanyId(@PathVariable int companyId) {
         return companyService.getEmployeesByCompanyId(companyId);
     }
+
+    @PutMapping("/{companyId}")
+    public Company updateCompanyByCompanyId(@PathVariable int companyId, @RequestBody Company updatedCompany) {
+        return companyService.updateById(companyId, updatedCompany);
+    }
+
+    @DeleteMapping("/{companyId}")
+    public void deleteEmployeesByCompanyId(@PathVariable int companyId){
+        companyService.deleteById(companyId);
+    }
 }
