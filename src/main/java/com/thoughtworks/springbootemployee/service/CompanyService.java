@@ -32,4 +32,8 @@ public class CompanyService {
     public void deleteById(Integer id) {
         companyRepository.deleteById(id);
     }
+
+    public List<Employee> getEmployeeByCompanyId(Integer companyId) {
+        return null;
+    }
 }

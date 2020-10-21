@@ -60,6 +60,19 @@ public class CompanyServiceTest {
     }
 
     @Test
+    void should_get_list_of_employee_when_search_given_certain_company() {
+        //given
+        List<Employee> employees = asList(new Employee(1, "Leo", 18, "male", 1000),
+                new Employee(2, "Leo", 18, "male", 1000));
+        Company company = new Company(1,"OOCL", 2, employees);
+        CompanyService service = new CompanyService(repository);
+        //when
+        List<Employee> actual = service.getEmployeeByCompanyId(company.getId());
+        //then
+        assertEquals(employees,actual);
+    }
+
+    @Test
     void should_update_company_when_update_by_company_id_given_company_id() {
         //given
         List<Employee> employees = asList(new Employee(1, "Leo", 18, "male", 1000),
