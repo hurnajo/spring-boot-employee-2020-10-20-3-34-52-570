@@ -22,11 +22,14 @@ public class CompanyRepository {
     }
 
     public Company findCompanyById(Integer companyId) {
-        return companies.stream().filter(company -> company.getCompanyId() == companyId).findFirst().orElse(null);
+        return companies.stream()
+                .filter(company -> company.getCompanyId().equals(companyId))
+                .findFirst().orElse(null);
     }
 
     public Company updateCompanyById(Integer id, Company updatedCompany) {
-        companies.stream().filter(company -> company.getCompanyId() == id).findFirst().ifPresent(employee -> {
+        companies.stream()
+                .filter(company -> company.getCompanyId().equals(id)).findFirst().ifPresent(employee -> {
             companies.remove(employee);
             companies.add(updatedCompany);
         });
@@ -34,7 +37,9 @@ public class CompanyRepository {
     }
 
     public void deleteById(Integer id) {
-        companies.stream().filter(company -> company.getCompanyId() == (id)).findFirst().ifPresent(companies::remove);
+        companies.stream().filter(company -> company.getCompanyId().equals(id))
+                .findFirst()
+                .ifPresent(companies::remove);
     }
 
 

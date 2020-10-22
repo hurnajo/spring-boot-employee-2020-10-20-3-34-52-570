@@ -32,7 +32,10 @@ public class EmployeesController {
 
     @GetMapping("/{employeeId}")
     public Employee get(@PathVariable Integer employeeId) {
-        return employees.stream().filter(employee -> employee.getId().equals(employeeId)).findFirst().orElse(null);
+        return employees.stream()
+                .filter(employee -> employee.getId().equals(employeeId))
+                .findFirst()
+                .orElse(null);
     }
 
     @PutMapping("/{employeeId}")
@@ -67,3 +70,5 @@ public class EmployeesController {
         return employeeService.getByPage(page,pageSize);
     }
 }
+
+//TODO 1.change employees to service
